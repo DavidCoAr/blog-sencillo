@@ -6,7 +6,7 @@ function Footer() {
       <footer className="container text-center">
         <div className="row justify-content-center">
           <div className="col-12">
-            <p>FF, &copy; {currentYear} Copyright</p>
+            <p>Final Fantasy y amigos, &copy; {currentYear} Copyright</p>
           </div>
         </div>
       </footer>
