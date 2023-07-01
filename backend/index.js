@@ -2,6 +2,9 @@
 const express = require("express");
 const app = express();
 
+// Configurar la ruta estática para servir los archivos (imágenes, por ejemplo) desde la carpeta "public"
+app.use(express.static('public'));
+
 //Importanción del módulo de conexión a nuestra base de datos
 const sequelize = require("./conexion_bd");
 
