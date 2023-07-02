@@ -1,4 +1,8 @@
 import React, { useEffect, useState } from 'react';
+//Importo FontAwesomeIcon y faTrash, para poder usar el icono tipo borrar faTrash
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTrash } from '@fortawesome/free-solid-svg-icons';
+
 
 function EntradaHome() {
   // Estado para almacenar los posts obtenidos
@@ -12,26 +16,51 @@ function EntradaHome() {
       .catch(error => console.error(error)); // Manejar errores en la consola
   }, []);
 
+  const handleDelete = async (id) => {
+    try {
+      await fetch(`http://localhost:3000/posts/${id}`, {
+        method: 'DELETE',
+      });
+      setPosts(posts.filter(post => post.id_entrada !== id));
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   return (
     <div className="container">
       <div className="row justify-content-center">
-        {posts.map(post => ( //Utiliza el método map para iterar sobre el array de posts y generar un elemento JSX para cada post.
-        // Crea un contenedor <div> para cada post y le asigna una clave única key utilizando el valor de id_entrada del post
-          <div className="col-md-6 col-lg-4 mb-4" key={post.id_entrada}>  
-            <div className="card">
-              <img src={`img-entrada/${post.img_entrada}`} className="card-img-top" alt="Imagen de entrada" />
-              <div className="card-body">
-                <h2 className="card-title">{post.encabezado}</h2>
-                <p className="card-text">{post.fecha_publicacion}</p>
-                <p className="card-text">{post.contenido}</p>
+        {posts.map(post => { //Utiliza el método map para iterar sobre el array de posts y generar un elemento JSX para cada post.
+          // Formatear la fecha con Date (no uso moment porque al parecer está descontinuado su soporte)
+          const fechaPublicacion = new Date(post.fecha_publicacion).toLocaleDateString('es-ES', { year: 'numeric', month: 'long', day: 'numeric' });
+  
+          // Obtener los primeros 50 caracteres del contenido con slice, añadiendo "..." a la vista preliminar del contenido si > 50 caracteres(si false, devuelve "")
+          const contenidoCorto = post.contenido.slice(0, 50) + (post.contenido.length > 50 ? '...' : '');
+  
+          return (
+            // Crea un contenedor <div> para cada post y le asigna una clave única key utilizando el valor de id_entrada del post
+            <div className="col-md-6 col-lg-4 mb-4" key={post.id_entrada}>
+              <div className="card">
+                <img src={`img-entrada/${post.img_entrada}`} className="card-img-top" alt="Imagen de entrada" />
+                <div className="card-body">
+                  <h2 className="card-title">{post.encabezado}</h2>
+                  <p className="card-text">{fechaPublicacion}</p>
+                  <p className="card-text">{contenidoCorto}</p>
+                  <button className="btn btn-danger" onClick={() => handleDelete(post.id_entrada)}>
+                    <FontAwesomeIcon icon={faTrash} />
+                  </button>
+                </div>
               </div>
             </div>
-          </div>
-        ))}
+          );
+        })}
       </div>
     </div>
   );
+  
 }
+
+
 
 export default EntradaHome;
 
