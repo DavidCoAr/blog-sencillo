@@ -18,10 +18,13 @@ function EntradaHome() {
 
   const handleDelete = async (id) => {
     try {
+      // Envía una solicitud DELETE al servidor utilizando el ID del post
       await fetch(`http://localhost:3000/posts/${id}`, {
         method: 'DELETE',
       });
+      // Actualiza el estado de los posts excluyendo el post eliminado
       setPosts(posts.filter(post => post.id_entrada !== id));
+      // Captura y muestra cualquier error que ocurra durante la eliminación
     } catch (error) {
       console.error(error);
     }

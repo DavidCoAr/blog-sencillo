@@ -5,6 +5,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import WebHome from "../pages/WebHome";
 import WebNuevaEntrada from "../pages/WebNuevaEntrada"
 import WebEntrada from "../pages/WebEntrada"
+import WebEditarEntrada from "../pages/WebEditarEntrada "
 
 
 const App = () => {
@@ -14,7 +15,7 @@ const App = () => {
                 <Route path="/" element={<WebHome/>} />
                 <Route path="/newpost" element={<WebNuevaEntrada/>} />
                 <Route path="/post/:id_entrada" element={<WebEntrada/>} />
-                
+                <Route path="/editpost/:id_entrada" element={<WebEditarEntrada />} />
              </Routes>
         </BrowserRouter>
     );

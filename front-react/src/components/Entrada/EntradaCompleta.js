@@ -47,6 +47,10 @@ function EntradaCompleta() {
       });
   };
 
+  const editarPost = () => {
+    window.location.href = `/editpost/${id_entrada}`;
+  };
+  
   if (!post) {
     return <div>Cargando...</div>;
   }
@@ -63,9 +67,10 @@ function EntradaCompleta() {
               <p className="card-text">{fechaPublicacion}</p>
               <p className="card-text">{post.contenido}</p>
               <div className="d-flex justify-content-between">
-                <button className="btn btn-primary">
+                <button className="btn btn-primary" onClick={editarPost}>
                     <FontAwesomeIcon icon={faEdit} /> Editar
                 </button>
+                
                 <button className="btn btn-danger" onClick={borrarPost}>
                     <FontAwesomeIcon icon={faTrash} /> Eliminar
                 </button>
