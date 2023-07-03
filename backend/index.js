@@ -114,6 +114,32 @@ app.delete('/posts/:id_entrada', async (req, res) => {
   }
 });
 
+//05- Define la ruta para obtener un post específico
+app.get('/post/:id_entrada', async (req, res) => {
+  const id_entrada = req.params.id_entrada;
+
+  try {
+    // Obtiene el post utilizando la id_entrada proporcionada
+    const post = await sequelize.query(
+      `SELECT * FROM posts WHERE id_entrada = :id_entrada`,
+      {
+        replacements: { id_entrada },
+        type: sequelize.QueryTypes.SELECT
+      }
+    );
+
+    if (post.length > 0) {
+      // Si se encuentra el post, envía los datos al cliente
+      res.json(post[0]);
+    } else {
+      // Si no se encuentra el post, envía un mensaje de error
+      res.status(404).json({ error: 'El post no existe' });
+    }
+  } catch (error) {
+    // Si ocurre algún error, envía un mensaje de error
+    res.status(500).json({ error: 'Error en el servidor' });
+  }
+});
   
 //Iniciar el servidor tras en el puerto 3000 
 app.listen(3000, function(){
