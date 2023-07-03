@@ -79,12 +79,12 @@ const EntradaNueva = () => {
       <div className="mb-3">
         <label htmlFor="fechaPublicacion" className="form-label">Fecha de publicación:</label>
         <input
-          type="text"
+          type="date"
           id="fechaPublicacion"
           name="fechaPublicacion"
           className="form-control"
-          value={fecha_publicacion}
-          onChange={event => setFechaPublicacion(event.target.value)}
+          value={new Date().toISOString().split('T')[0]}
+          readOnly // Establece el campo como de solo lectura
         />
       </div>
       <div className="mb-3">
