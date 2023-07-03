@@ -2,6 +2,12 @@
 const express = require("express");
 const app = express();
 
+// Middleware para analizar el cuerpo de la solicitud como JSON
+app.use(express.json());
+
+// Middleware para analizar el cuerpo de la solicitud como datos de formulario codificados en URL
+app.use(express.urlencoded({ extended: true }));
+
 // Configurar la ruta estática para servir los archivos (imágenes, por ejemplo) desde la carpeta "public"
 app.use(express.static('public'));
 
@@ -36,7 +42,7 @@ app.get('/allposts', async (req, res) => {
 app.post('/newpost', async (req, res) => {
     try {
       // Obtener los datos del nuevo post desde el cuerpo de la solicitud
-      const { img_entrada, encabezado, fecha_publicacion, contenido } = req.body;
+      const {img_entrada, encabezado, fecha_publicacion, contenido } = req.body;
   
       // Ejecutar una consulta INSERT para crear un nuevo registro en la tabla "posts"
       await sequelize.query(

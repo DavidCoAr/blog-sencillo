@@ -41,7 +41,8 @@ function EntradaHome() {
             // Crea un contenedor <div> para cada post y le asigna una clave única key utilizando el valor de id_entrada del post
             <div className="col-md-6 col-lg-4 mb-4" key={post.id_entrada}>
               <div className="card">
-                <img src={`img-entrada/${post.img_entrada}`} className="card-img-top" alt="Imagen de entrada" />
+                <img src="logo192.png" className="card-img-top" alt="Imagen provisional" />  
+                <img src={post.img_entrada} className="card-img-top" alt="Imagen de entrada" />
                 <div className="card-body">
                   <h2 className="card-title">{post.encabezado}</h2>
                   <p className="card-text">{fechaPublicacion}</p>
