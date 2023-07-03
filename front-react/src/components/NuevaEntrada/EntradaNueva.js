@@ -48,6 +48,10 @@ const EntradaNueva = () => {
       });
   };
 
+  const creadoPost = () => {
+    window.location.href = "/";
+  };
+
   return (
     <form onSubmit={handleSubmit} className="mx-auto col-lg-6">
       <div className="mb-3">
@@ -97,7 +101,7 @@ const EntradaNueva = () => {
           onChange={event => setContenido(event.target.value)}
         />
       </div>
-      <button type="submit" className="btn btn-primary">
+      <button type="submit" className="btn btn-primary" onClick={creadoPost}>
         <FontAwesomeIcon icon={faSave} /> Guardar
       </button>
     </form>
